@@ -1,0 +1,564 @@
+{
+  "chantiers": [
+    {
+      "id": "chantier-1",
+      "nom": "Création d'un jardin complet",
+      "taches": [
+        {
+          "id": "c1-t1",
+          "nom": "Installation du chantier",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Véhicule, signalisation",
+          "apres": []
+        },
+        {
+          "id": "c1-t2",
+          "nom": "Débroussaillage et nettoyage",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Débroussailleuse, souffleur",
+          "apres": []
+        },
+        {
+          "id": "c1-t3",
+          "nom": "Terrassement et nivellement",
+          "duree_jours": 1.5,
+          "effectif": 3,
+          "materiel": "Mini-pelle, laser, râteau",
+          "apres": []
+        },
+        {
+          "id": "c1-t4",
+          "nom": "Création des cheminements",
+          "duree_jours": 1.5,
+          "effectif": 2,
+          "materiel": "Plaque vibrante, outils",
+          "apres": []
+        },
+        {
+          "id": "c1-t5",
+          "nom": "Préparation des massifs",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Bêche, amendement",
+          "apres": []
+        },
+        {
+          "id": "c1-t6",
+          "nom": "Plantation des végétaux",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Tarière, pelle, arrosoir",
+          "apres": []
+        },
+        {
+          "id": "c1-t7",
+          "nom": "Préparation du sol pour gazon",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Motobineuse, râteau",
+          "apres": []
+        },
+        {
+          "id": "c1-t8",
+          "nom": "Pose du gazon",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Rouleau, gazon",
+          "apres": []
+        },
+        {
+          "id": "c1-t9",
+          "nom": "Nettoyage et réception",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Souffleur, balai",
+          "apres": []
+        }
+      ]
+    },
+    {
+      "id": "chantier-2",
+      "nom": "Plantation d'arbres et d'arbustes",
+      "taches": [
+        {
+          "id": "c2-t1",
+          "nom": "Implantation et repérage",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Mètre, piquets, cordeau",
+          "apres": []
+        },
+        {
+          "id": "c2-t2",
+          "nom": "Livraison et réception des végétaux",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Camion, transpalette",
+          "apres": []
+        },
+        {
+          "id": "c2-t3",
+          "nom": "Préparation des fosses",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Mini-pelle, tarière",
+          "apres": []
+        },
+        {
+          "id": "c2-t4",
+          "nom": "Amendement et drainage si nécessaire",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Compost, graviers",
+          "apres": []
+        },
+        {
+          "id": "c2-t5",
+          "nom": "Mise en place des végétaux",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Pelle, sangles, brouette",
+          "apres": []
+        },
+        {
+          "id": "c2-t6",
+          "nom": "Tuteurage et attaches",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Tuteurs, liens",
+          "apres": []
+        },
+        {
+          "id": "c2-t7",
+          "nom": "Arrosage et cuvettes",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Tuyau, arrosoir",
+          "apres": []
+        },
+        {
+          "id": "c2-t8",
+          "nom": "Nettoyage et contrôle",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Outils manuels",
+          "apres": []
+        }
+      ]
+    },
+    {
+      "id": "chantier-3",
+      "nom": "Création d'un massif paysager",
+      "taches": [
+        {
+          "id": "c3-t1",
+          "nom": "Délimitation du massif",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Cordeau, piquets",
+          "apres": []
+        },
+        {
+          "id": "c3-t2",
+          "nom": "Désherbage et nettoyage",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Débroussailleuse, outils",
+          "apres": []
+        },
+        {
+          "id": "c3-t3",
+          "nom": "Travail et amendement du sol",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Grelinette, compost",
+          "apres": []
+        },
+        {
+          "id": "c3-t4",
+          "nom": "Répartition des végétaux",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Plants, brouette",
+          "apres": []
+        },
+        {
+          "id": "c3-t5",
+          "nom": "Plantation",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Pelle, transplantoir",
+          "apres": []
+        },
+        {
+          "id": "c3-t6",
+          "nom": "Mise en place du paillage",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Paillage, fourche",
+          "apres": []
+        },
+        {
+          "id": "c3-t7",
+          "nom": "Arrosage et finitions",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Tuyau, outils",
+          "apres": []
+        }
+      ]
+    },
+    {
+      "id": "chantier-4",
+      "nom": "Pose de gazon naturel",
+      "taches": [
+        {
+          "id": "c4-t1",
+          "nom": "Nettoyage du terrain",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Râteau, brouette",
+          "apres": []
+        },
+        {
+          "id": "c4-t2",
+          "nom": "Décaissement si nécessaire",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Mini-pelle",
+          "apres": []
+        },
+        {
+          "id": "c4-t3",
+          "nom": "Apport de terre végétale",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Camion, brouette",
+          "apres": []
+        },
+        {
+          "id": "c4-t4",
+          "nom": "Nivellement et préparation",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Râteau, rouleau",
+          "apres": []
+        },
+        {
+          "id": "c4-t5",
+          "nom": "Livraison du gazon",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Camion",
+          "apres": []
+        },
+        {
+          "id": "c4-t6",
+          "nom": "Pose des rouleaux",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Cutter, planche",
+          "apres": []
+        },
+        {
+          "id": "c4-t7",
+          "nom": "Roulage et arrosage",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Rouleau, tuyau",
+          "apres": []
+        },
+        {
+          "id": "c4-t8",
+          "nom": "Nettoyage et réception",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Souffleur, balai",
+          "apres": []
+        }
+      ]
+    },
+    {
+      "id": "chantier-5",
+      "nom": null,
+      "taches": [
+        {
+          "id": "c5-t1",
+          "nom": "Étude et repérage du réseau",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Plan, mètre",
+          "apres": []
+        },
+        {
+          "id": "c5-t2",
+          "nom": "Implantation des tranchées",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Piquets, cordeau",
+          "apres": []
+        },
+        {
+          "id": "c5-t3",
+          "nom": "Ouverture des tranchées",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Trancheuse, pelle",
+          "apres": []
+        },
+        {
+          "id": "c5-t4",
+          "nom": "Pose des canalisations",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Tuyaux PE, raccords",
+          "apres": []
+        },
+        {
+          "id": "c5-t5",
+          "nom": "Installation des électrovannes",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Regard, électrovannes",
+          "apres": []
+        },
+        {
+          "id": "c5-t6",
+          "nom": "Installation des arroseurs",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Arroseurs, raccords",
+          "apres": []
+        },
+        {
+          "id": "c5-t7",
+          "nom": "Raccordement du programmateur",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Programmateur, câbles",
+          "apres": []
+        },
+        {
+          "id": "c5-t8",
+          "nom": "Essais et réglages",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Manomètre, outils",
+          "apres": []
+        },
+        {
+          "id": "c5-t9",
+          "nom": "Remblaiement et nettoyage",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Pelle, râteau",
+          "apres": []
+        }
+      ]
+    },
+    {
+      "id": "chantier-6",
+      "nom": "Création d'une terrasse en bois",
+      "taches": [
+        {
+          "id": "c6-t1",
+          "nom": "Implantation et mesures",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Mètre, niveau",
+          "apres": []
+        },
+        {
+          "id": "c6-t2",
+          "nom": "Préparation du terrain",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Pelle, plaque vibrante",
+          "apres": []
+        },
+        {
+          "id": "c6-t3",
+          "nom": "Réalisation des supports",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Plots, béton si nécessaire",
+          "apres": []
+        },
+        {
+          "id": "c6-t4",
+          "nom": "Pose des lambourdes",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Perceuse, visserie",
+          "apres": []
+        },
+        {
+          "id": "c6-t5",
+          "nom": "Pose des lames de terrasse",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Scie, visseuse",
+          "apres": []
+        },
+        {
+          "id": "c6-t6",
+          "nom": "Découpes et finitions",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Scie circulaire, ponceuse",
+          "apres": []
+        },
+        {
+          "id": "c6-t7",
+          "nom": "Nettoyage et réception",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Balai, souffleur",
+          "apres": []
+        }
+      ]
+    },
+    {
+      "id": "chantier-7",
+      "nom": "Création d'une allée en pavés",
+      "taches": [
+        {
+          "id": "c7-t1",
+          "nom": "Traçage et implantation",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Cordeau, piquets",
+          "apres": []
+        },
+        {
+          "id": "c7-t2",
+          "nom": "Décaissement",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Mini-pelle",
+          "apres": []
+        },
+        {
+          "id": "c7-t3",
+          "nom": "Mise en place du fond de forme",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Grave, plaque vibrante",
+          "apres": []
+        },
+        {
+          "id": "c7-t4",
+          "nom": "Pose des bordures",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Béton, niveau",
+          "apres": []
+        },
+        {
+          "id": "c7-t5",
+          "nom": "Réalisation du lit de pose",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Sable, règle",
+          "apres": []
+        },
+        {
+          "id": "c7-t6",
+          "nom": "Pose des pavés",
+          "duree_jours": 1,
+          "effectif": 2,
+          "materiel": "Maillet, disqueuse",
+          "apres": []
+        },
+        {
+          "id": "c7-t7",
+          "nom": "Jointoiement et compactage",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Sable de joint, plaque avec protection",
+          "apres": []
+        },
+        {
+          "id": "c7-t8",
+          "nom": "Nettoyage et réception",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Balai, souffleur",
+          "apres": []
+        }
+      ]
+    },
+    {
+      "id": "chantier-8",
+      "nom": "Entretien d'espaces verts",
+      "taches": [
+        {
+          "id": "c8-t1",
+          "nom": "Inspection et préparation",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Fiche de suivi",
+          "apres": []
+        },
+        {
+          "id": "c8-t2",
+          "nom": "Ramassage des déchets",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Souffleur, râteau",
+          "apres": []
+        },
+        {
+          "id": "c8-t3",
+          "nom": "Tonte des pelouses",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Tondeuse",
+          "apres": []
+        },
+        {
+          "id": "c8-t4",
+          "nom": "Taille des haies",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Taille-haie",
+          "apres": []
+        },
+        {
+          "id": "c8-t5",
+          "nom": "Désherbage des massifs",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Binette, outils manuels",
+          "apres": []
+        },
+        {
+          "id": "c8-t6",
+          "nom": "Taille des arbustes",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Sécateur, coupe-branches",
+          "apres": []
+        },
+        {
+          "id": "c8-t7",
+          "nom": "Évacuation des déchets verts",
+          "duree_jours": 0.5,
+          "effectif": 2,
+          "materiel": "Remorque, broyeur éventuel",
+          "apres": []
+        },
+        {
+          "id": "c8-t8",
+          "nom": "Nettoyage et contrôle final",
+          "duree_jours": 0.5,
+          "effectif": 1,
+          "materiel": "Souffleur",
+          "apres": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#244b3b">
+  <title>Chantier Planner — Planification paysagère</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --green-950: #17372c;
+      --green-800: #244b3b;
+      --green-700: #32634d;
+      --green-100: #eaf1ec;
+      --green-50: #f5f8f5;
+      --ink: #1d2923;
+      --muted: #66736b;
+      --line: #dce4dd;
+      --paper: #ffffff;
+      --bg: #f3f6f3;
+      --amber: #8a5b12;
+      --amber-bg: #fff6e5;
+      --red: #8f2929;
+      --red-bg: #fff0f0;
+      --radius: 14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); }
+    header {
+      background: var(--green-950); color: white; padding: 22px max(20px, calc((100% - 1180px)/2));
+    }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .brand-mark {
+      width:42px; height:42px; display:grid; place-items:center; border-radius:12px;
+      background:#ffffff1a; font-size:22px;
+    }
+    header h1 { margin:0; font-size:clamp(1.2rem, 2.5vw, 1.65rem); letter-spacing:-.03em; }
+    header p { margin:5px 0 0; color:#d5e2d9; font-size:.92rem; }
+    main { width:min(1180px, calc(100% - 32px)); margin:28px auto 56px; }
+    .top-grid { display:grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1.6fr); gap:18px; }
+    .panel {
+      background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+      padding:20px; box-shadow:0 3px 14px #1b352408;
+    }
+    h2 { margin:0 0 16px; font-size:1.05rem; letter-spacing:-.015em; }
+    .field-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:13px; }
+    .field { display:flex; flex-direction:column; gap:6px; min-width:0; }
+    .field.full { grid-column:1/-1; }
+    label { color:#435148; font-size:.82rem; font-weight:650; }
+    input, select {
+      width:100%; min-height:42px; padding:9px 11px; border:1px solid #cbd6cd;
+      border-radius:9px; background:white; color:var(--ink); font:inherit; font-size:.93rem;
+    }
+    input:focus, select:focus { outline:3px solid #32634d24; border-color:var(--green-700); }
+    .help { margin:10px 0 0; color:var(--muted); font-size:.82rem; line-height:1.45; }
+    .tasks-section { margin-top:18px; }
+    .section-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin:0 2px 12px; }
+    .section-heading h2 { margin:0; }
+    .section-heading p { margin:4px 0 0; color:var(--muted); font-size:.85rem; }
+    .task-list { display:grid; gap:10px; }
+    .task {
+      background:white; border:1px solid var(--line); border-radius:12px; padding:15px 16px;
+    }
+    .task-head { display:flex; align-items:flex-start; gap:12px; }
+    .task-check { width:19px; height:19px; min-height:0; margin:3px 0 0; accent-color:var(--green-700); flex:0 0 auto; }
+    .task-main { min-width:0; flex:1; }
+    .task-title-row { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+    .task-title { margin:0; font-size:.96rem; font-weight:700; line-height:1.35; }
+    .task-id { color:var(--muted); font-size:.76rem; white-space:nowrap; }
+    .task-controls { display:grid; grid-template-columns:repeat(2, minmax(110px, 150px)); gap:9px; margin-top:12px; }
+    .task-controls input { min-height:38px; }
+    .task-controls label { font-size:.76rem; }
+    .task-details { margin:11px 0 0 31px; display:grid; gap:6px; color:#58665e; font-size:.82rem; line-height:1.45; }
+    .task-details strong { color:#3d4b42; }
+    .subtasks { margin:6px 0 0; padding-left:18px; }
+    .comment { padding:8px 10px; border-radius:8px; background:var(--green-50); }
+    .task.disabled { opacity:.52; }
+    .summary {
+      position:sticky; bottom:12px; z-index:5; margin-top:18px; padding:15px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      background:var(--green-950); color:white; border-radius:13px; box-shadow:0 8px 28px #10251b30;
+    }
+    .summary small { display:block; color:#c8d8ce; font-size:.78rem; }
+    .summary strong { display:block; margin-top:2px; font-size:1.45rem; letter-spacing:-.03em; }
+    .summary .count { text-align:right; }
+    .summary .count strong { font-size:1.05rem; }
+    .notice { padding:15px 16px; border-radius:11px; border:1px solid #ead5a9; background:var(--amber-bg); color:#68470f; line-height:1.5; }
+    .notice.error { border-color:#efc4c4; background:var(--red-bg); color:var(--red); }
+    .notice h2 { margin:0 0 6px; font-size:1rem; }
+    .empty { padding:30px; text-align:center; color:var(--muted); background:white; border:1px dashed #cbd6cd; border-radius:12px; }
+    footer { color:var(--muted); text-align:center; font-size:.78rem; padding:22px 12px 0; }
+    @media (max-width:760px) {
+      main { width:min(100% - 22px, 600px); margin-top:16px; }
+      .top-grid { grid-template-columns:1fr; gap:12px; }
+      .panel { padding:16px; }
+      .field-grid { grid-template-columns:1fr; }
+      .field.full { grid-column:auto; }
+      .task { padding:13px; }
+      .task-title-row { display:block; }
+      .task-id { display:block; margin-top:3px; }
+      .task-controls { grid-template-columns:repeat(2, minmax(0,1fr)); }
+      .summary { bottom:8px; padding:13px 15px; }
+    }
+    @media (max-width:380px) {
+      .task-controls { grid-template-columns:1fr 1fr; }
+      .summary strong { font-size:1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">🌿</div>
+      <div>
+        <h1>Chantier Planner</h1>
+        <p>Préparation et estimation de chantiers paysagers</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="load-error" class="notice error" role="alert" hidden></div>
+    <div id="app" hidden>
+      <div class="top-grid">
+        <section class="panel" aria-labelledby="chantier-heading">
+          <h2 id="chantier-heading">Modèle de chantier</h2>
+          <div class="field">
+            <label for="chantier-select">Type de chantier</label>
+            <select id="chantier-select"></select>
+          </div>
+          <p class="help">Choisissez un modèle pour afficher sa liste de tâches. Les valeurs proviennent du fichier chantiers.json.</p>
+        </section>
+
+        <section class="panel" aria-labelledby="infos-heading">
+          <h2 id="infos-heading">Informations du chantier</h2>
+          <div class="field-grid">
+            <div class="field">
+              <label for="entreprise">Entreprise</label>
+              <input id="entreprise" type="text" placeholder="Nom de l'entreprise" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="contact-entreprise">Contact entreprise</label>
+              <input id="contact-entreprise" type="text" placeholder="Nom du responsable">
+            </div>
+            <div class="field">
+              <label for="client">Client</label>
+              <input id="client" type="text" placeholder="Nom du client">
+            </div>
+            <div class="field">
+              <label for="lieu">Lieu du chantier</label>
+              <input id="lieu" type="text" placeholder="Adresse du chantier">
+            </div>
+            <div class="field full">
+              <label for="reference">Référence / notes</label>
+              <input id="reference" type="text" placeholder="Référence du devis ou informations complémentaires">
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="tasks-section" aria-labelledby="tasks-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="tasks-heading">Tâches à réaliser</h2>
+            <p id="task-caption">Cochez les tâches à inclure dans la planification.</p>
+          </div>
+        </div>
+        <div id="task-list" class="task-list"></div>
+      </section>
+
+      <section class="summary" aria-live="polite">
+        <div>
+          <small>Durée totale sélectionnée</small>
+          <strong id="total-days">0 jour</strong>
+        </div>
+        <div class="count">
+          <small>Tâches retenues</small>
+          <strong id="task-count">0 / 0</strong>
+        </div>
+      </section>
+      <footer>Les durées et effectifs sont des estimations modifiables. Vérifiez les conditions réelles avant validation du planning.</footer>
+    </div>
+  </main>
+
+  <script>
+    "use strict";
+
+    const app = document.getElementById("app");
+    const errorBox = document.getElementById("load-error");
+    const chantierSelect = document.getElementById("chantier-select");
+    const taskList = document.getElementById("task-list");
+    const totalDays = document.getElementById("total-days");
+    const taskCount = document.getElementById("task-count");
+    const taskCaption = document.getElementById("task-caption");
+
+    let chantiers = [];
+
+    function showError(title, detail) {
+      errorBox.hidden = false;
+      errorBox.innerHTML = "";
+      const heading = document.createElement("h2");
+      heading.textContent = title;
+      const paragraph = document.createElement("p");
+      paragraph.textContent = detail;
+      errorBox.append(heading, paragraph);
+      app.hidden = true;
+    }
+
+    function validateData(data) {
+      if (!data || !Array.isArray(data.chantiers)) {
+        throw new Error('La structure attendue est un objet contenant une liste "chantiers".');
+      }
+      data.chantiers.forEach((chantier, ci) => {
+        if (!chantier || !Array.isArray(chantier.taches)) {
+          throw new Error(`Chantier ${ci + 1} : la propriété "taches" doit être une liste.`);
+        }
+        chantier.taches.forEach((tache, ti) => {
+          const where = `Chantier ${ci + 1}, tâche ${ti + 1}`;
+          if (!tache || typeof tache.id !== "string" || typeof tache.nom !== "string") {
+            throw new Error(`${where} : les champs "id" et "nom" doivent être renseignés.`);
+          }
+          if (!Array.isArray(tache.apres)) {
+            throw new Error(`${where} : "apres" doit être une liste d'identifiants.`);
+          }
+          if (tache.sous_taches !== undefined) {
+            if (!Array.isArray(tache.sous_taches) || !tache.sous_taches.every(s => s && typeof s.nom === "string" && Number.isFinite(s.duree_jours))) {
+              throw new Error(`${where} : format de "sous_taches" incorrect.`);
+            }
+          } else if (!Number.isFinite(tache.duree_jours)) {
+            throw new Error(`${where} : "duree_jours" doit être un nombre.`);
+          }
+          if (!Number.isFinite(tache.effectif)) {
+            throw new Error(`${where} : "effectif" doit être un nombre.`);
+          }
+        });
+      });
+    }
+
+    function effectiveDuration(task) {
+      if (Array.isArray(task.sous_taches)) {
+        return task.sous_taches.reduce((sum, subtask) => sum + subtask.duree_jours, 0);
+      }
+      return task.duree_jours;
+    }
+
+    function formatDays(value) {
+      return `${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 }).format(value)} j`;
+    }
+
+    function makeField(labelText, value, type, min, step, onInput) {
+      const wrapper = document.createElement("div");
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      const id = `field-${Math.random().toString(36).slice(2)}`;
+      wrapper.className = "field";
+      label.htmlFor = id;
+      label.textContent = labelText;
+      input.id = id;
+      input.type = type;
+      input.value = value;
+      if (type === "number") {
+        input.min = String(min);
+        input.step = String(step);
+        input.inputMode = "decimal";
+      }
+      input.addEventListener("input", onInput);
+      wrapper.append(label, input);
+      return wrapper;
+    }
+
+    function renderTasks() {
+      const chantier = chantiers[Number(chantierSelect.value)];
+      taskList.innerHTML = "";
+      if (!chantier || chantier.taches.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "Aucune tâche n'est disponible pour ce modèle.";
+        taskList.append(empty);
+        updateSummary();
+        return;
+      }
+
+      chantier.taches.forEach(task => {
+        const card = document.createElement("article");
+        card.className = "task";
+        card.dataset.taskId = task.id;
+
+        const head = document.createElement("div");
+        head.className = "task-head";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "task-check";
+        checkbox.checked = task._selected !== false;
+        checkbox.setAttribute("aria-label", `Inclure ${task.nom}`);
+        checkbox.addEventListener("change", () => {
+          task._selected = checkbox.checked;
+          card.classList.toggle("disabled", !checkbox.checked);
+          updateSummary();
+        });
+
+        const main = document.createElement("div");
+        main.className = "task-main";
+        const titleRow = document.createElement("div");
+        titleRow.className = "task-title-row";
+        const title = document.createElement("h3");
+        title.className = "task-title";
+        title.textContent = task.nom;
+        const idLabel = document.createElement("span");
+        idLabel.className = "task-id";
+        idLabel.textContent = `ID : ${task.id}`;
+        titleRow.append(title, idLabel);
+
+        const controls = document.createElement("div");
+        controls.className = "task-controls";
+
+        const duration = effectiveDuration(task);
+        const durationField = makeField(
+          "Durée (jours)", duration, "number", 0, 0.5,
+          event => {
+            const value = Number(event.target.value);
+            if (Number.isFinite(value) && value >= 0) {
+              if (Array.isArray(task.sous_taches)) {
+                task._duree_modifiee = value;
+              } else {
+                task.duree_jours = value;
+              }
+              updateSummary();
+            }
+          }
+        );
+        const workforceField = makeField(
+          "Effectif (personnes)", task.effectif, "number", 0, 1,
+          event => {
+            const value = Number(event.target.value);
+            if (Number.isInteger(value) && value >= 0) {
+              task.effectif = value;
+            }
+          }
+        );
+        controls.append(durationField, workforceField);
+        main.append(titleRow, controls);
+        head.append(checkbox, main);
+        card.append(head);
+
+        const details = document.createElement("div");
+        details.className = "task-details";
+        if (task.materiel) {
+          const material = document.createElement("div");
+          material.innerHTML = "<strong>Matériel :</strong> ";
+          material.append(document.createTextNode(task.materiel));
+          details.append(material);
+        }
+        if (Array.isArray(task.apres) && task.apres.length) {
+          const dependencies = document.createElement("div");
+          dependencies.innerHTML = "<strong>À réaliser après :</strong> ";
+          dependencies.append(document.createTextNode(task.apres.join(", ")));
+          details.append(dependencies);
+        }
+        if (Array.isArray(task.sous_taches) && task.sous_taches.length) {
+          const subTitle = document.createElement("div");
+          subTitle.innerHTML = "<strong>Sous-tâches :</strong>";
+          const list = document.createElement("ul");
+          list.className = "subtasks";
+          task.sous_taches.forEach(sub => {
+            const item = document.createElement("li");
+            item.textContent = `${sub.nom} — ${formatDays(sub.duree_jours)}`;
+            list.append(item);
+          });
+          details.append(subTitle, list);
+        }
+        if (task.commentaire) {
+          const comment = document.createElement("div");
+          comment.className = "comment";
+          comment.textContent = task.commentaire;
+          details.append(comment);
+        }
+        if (details.childNodes.length) card.append(details);
+        card.classList.toggle("disabled", !checkbox.checked);
+        taskList.append(card);
+      });
+
+      taskCaption.textContent = `${chantier.taches.length} tâche(s) dans ce modèle. Cochez celles à inclure et ajustez les valeurs si nécessaire.`;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const chantier = chantiers[Number(chantierSelect.value)];
+      if (!chantier) return;
+      const selected = chantier.taches.filter(task => task._selected !== false);
+      const total = selected.reduce((sum, task) => {
+        return sum + (Number.isFinite(task._duree_modifiee) ? task._duree_modifiee : effectiveDuration(task));
+      }, 0);
+      totalDays.textContent = formatDays(total);
+      taskCount.textContent = `${selected.length} / ${chantier.taches.length}`;
+    }
+
+    function initialize() {
+      chantiers.forEach((chantier, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = chantier.nom || `Type de chantier non renseigné (${index + 1})`;
+        chantierSelect.append(option);
+      });
+      chantierSelect.addEventListener("change", renderTasks);
+      app.hidden = false;
+      renderTasks();
+    }
+
+    async function loadData() {
+      try {
+        const response = await fetch("chantiers.json", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`Le fichier chantiers.json est introuvable ou inaccessible (HTTP ${response.status}). Vérifiez qu'il est publié à côté de index.html.`);
+        }
+        let data;
+        try {
+          data = await response.json();
+        } catch (parseError) {
+          throw new Error(`Le fichier chantiers.json n'est pas un JSON valide. Vérifiez les virgules, guillemets et accolades. Détail : ${parseError.message}`);
+        }
+        validateData(data);
+        chantiers = data.chantiers;
+        initialize();
+      } catch (error) {
+        showError("Impossible de charger les modèles de chantier", error.message || "Une erreur inconnue est survenue.");
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
